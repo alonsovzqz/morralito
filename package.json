@@ -1,0 +1,44 @@
+{
+  "name": "morralito",
+  "productName": "currency-exchange-app",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "./",
+  "main": "main.js",
+  "scripts": {
+    "prod": "webpack --mode production --config webpack.build.config.js && electron --noDevServer .",
+    "start": "webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.dev.config.js --mode development",
+    "build": "webpack --config webpack.build.config.js --mode production",
+    "package": "npm run build",
+    "postpackage": "electron-packager ./ --out=./builds"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "bootstrap-icons": "^1.0.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "babili-webpack-plugin": "^0.1.2",
+    "css-loader": "^4.3.0",
+    "electron": "^10.1.2",
+    "electron-devtools-installer": "^3.1.1",
+    "electron-packager": "^15.1.0",
+    "file-loader": "^6.1.0",
+    "html-webpack-plugin": "^4.5.0",
+    "mini-css-extract-plugin": "^0.11.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

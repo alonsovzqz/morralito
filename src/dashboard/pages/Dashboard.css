@@ -1,0 +1,11 @@
+.dashboard {
+  height: inherit;
+}
+
+.row {
+  margin-bottom: 1rem;
+}
+
+.options {
+  padding-right: 6.2rem;
+}

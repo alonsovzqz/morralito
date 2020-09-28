@@ -1,0 +1,93 @@
+import React, { useReducer, useEffect } from "react";
+
+import { validate } from "../../util/validators";
+
+import "./Input.css";
+
+const InputReducer = (state, action) => {
+  switch (action.type) {
+    case "CHANGE":
+      return {
+        ...state,
+        value: action.val,
+        isValid: validate(action.val, action.validators),
+      };
+    case "TOUCH":
+      return {
+        ...state,
+        isTouched: true,
+      };
+    default:
+      return state;
+  }
+};
+
+const Input = (props) => {
+  const [inputState, dispatch] = useReducer(InputReducer, {
+    value: props.initialValue || "",
+    isTouched: false,
+    isValid: props.initialValid || false,
+  });
+
+  const { id, onInput } = props;
+  const { value, isValid } = inputState;
+
+  useEffect(() => {
+    onInput(id, value, isValid);
+  }, [id, value, isValid, onInput]);
+
+  const changeHandler = (event) => {
+    dispatch({
+      type: "CHANGE",
+      val: event.target.value,
+      validators: props.validators,
+    });
+  };
+
+  const touchHandler = () => {
+    dispatch({
+      type: "TOUCH",
+    });
+  };
+
+  const element =
+    props.elementType === "input" ? (
+      <div className="form-group">
+        <label htmlFor={props.id}>{props.label}</label>
+        <input
+          type={props.type}
+          className={`form-control ${
+            !inputState.isValid && inputState.isTouched && "is-invalid"
+          }`}
+          id={props.id}
+          aria-describedby={props.id}
+          placeholder={props.placeholder}
+          onChange={changeHandler}
+          onBlur={touchHandler}
+        />
+        {!inputState.isValid && inputState.isTouched && (
+          <div className="invalid-feedback">{props.errorMessage}</div>
+        )}
+      </div>
+    ) : (
+      <div className="form-group">
+        <label htmlFor={props.id}>{props.label}</label>
+        <textarea
+          className={`form-control ${
+            !inputState.isValid && inputState.isTouched && "is-invalid"
+          }`}
+          id={props.id}
+          rows={props.rows || "3"}
+          onChange={changeHandler}
+          onBlur={touchHandler}
+        ></textarea>
+        {!inputState.isValid && inputState.isTouched && (
+          <div className="invalid-feedback">{props.errorMessage}</div>
+        )}
+      </div>
+    );
+
+  return element;
+};
+
+export default Input;
