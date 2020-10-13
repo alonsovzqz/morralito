@@ -1,23 +1,38 @@
 import React from "react";
-import { Redirect, Route, Switch, HashRouter } from "react-router-dom";
+import {
+  Redirect,
+  Route,
+  Switch,
+  BrowserRouter as Router,
+} from "react-router-dom";
 
 import Login from "./login/pages/Login";
 import Dashboard from "./dashboard/pages/Dashboard";
+import Sell from "./dashboard/pages/Sell";
+import UserMenu from "./shared/components/UIElements/UserMenu";
 
 const App = () => {
   let routes = null;
 
   routes = (
     <Switch>
-      <Route path="/" exact component={Login} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Redirect to="/" component={Login} />
+      <Route path="/" exact>
+        <Login />
+      </Route>
+      <Route path="/dashboard">
+        <Dashboard />
+      </Route>
+      <Route path="/sell">
+        <Sell />
+      </Route>
+      <Redirect to="/" />
     </Switch>
   );
   return (
-    <HashRouter>
+    <Router>
+      <UserMenu />
       <main className="container-fluid">{routes}</main>
-    </HashRouter>
+    </Router>
   );
 };
 

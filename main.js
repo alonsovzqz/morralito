@@ -2,6 +2,11 @@ const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const url = require("url");
 
+const {
+  default: installExtension,
+  REACT_DEVELOPER_TOOLS,
+} = require("electron-devtools-installer");
+
 let dev = false;
 if (
   process.defaultApp ||
@@ -38,6 +43,12 @@ const createWindow = () => {
       pathname: path.join(__dirname, "dist", "index.html"),
       slashes: true,
     });
+  }
+
+  if (dev) {
+    installExtension(REACT_DEVELOPER_TOOLS).catch((err) =>
+      console.log("Error loading React DevTools: ", err)
+    );
   }
 
   win.loadURL(indexPath);

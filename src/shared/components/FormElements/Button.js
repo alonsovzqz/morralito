@@ -26,7 +26,6 @@ const Button = (props) => {
     return (
       <Link
         to={props.to}
-        exact={props.exact}
         className={`btn btn-${
           props.inverse
             ? `outline-${props.buttonType}-`

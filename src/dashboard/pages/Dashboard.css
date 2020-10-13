@@ -1,11 +1,12 @@
 .dashboard {
   height: inherit;
+  padding-top: 1em;
 }
 
-.row {
-  margin-bottom: 1rem;
+.operations .col-6 {
+  margin-bottom: 1em;
 }
 
-.options {
-  padding-right: 6.2rem;
+.card .bs {
+  font-size: 2.5em;
 }

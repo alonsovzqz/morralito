@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import Button from "../../shared/components/FormElements/Button";
 import Input from "../../shared/components/FormElements/Input";
@@ -12,6 +13,7 @@ import { useForm } from "../../shared/hooks/form-hook";
 import "./Login.css";
 
 const Login = () => {
+  const history = useHistory();
   const [formState, inputHandler, setFormData] = useForm(
     {
       username: {
@@ -47,12 +49,16 @@ const Login = () => {
     {
       id: 1,
       username: "juan.perez",
+      name: "Juan Perez",
+      phone: "111-444-5555",
       password: "JuanPerez25",
       isAdmin: false,
     },
     {
       id: 2,
       username: "judith.chavez",
+      name: "Judith Chavez",
+      phone: "555-555-5555",
       password: "JudithChavez26",
       isAdmin: true,
     },
@@ -61,19 +67,9 @@ const Login = () => {
   const authSubmitHandler = (event) => {
     event.preventDefault();
 
-    const { username, password } = formState.inputs;
-
-    if (
-      username.value === users[0].username &&
-      password === users[0].password
-    ) {
-      console.log("Your not an admin.");
-    } else if (
-      username.value === users[1].username &&
-      password === users[1].password
-    ) {
-      console.log("You are an admin!");
-    }
+    // TO-DO: Change the logic to redirect
+    // the user once logged in.
+    history.push("/dashboard");
   };
 
   return (
