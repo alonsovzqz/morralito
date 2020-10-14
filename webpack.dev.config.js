@@ -42,6 +42,7 @@ module.exports = {
           content: "script-src 'self' 'unsafe-inline';",
         },
       },
+      publicPath: "/",
     }),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("development"),
@@ -50,6 +51,7 @@ module.exports = {
   devtool: "cheap-source-map",
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
+    historyApiFallback: true,
     stats: {
       colors: true,
       chunks: false,

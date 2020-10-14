@@ -22,7 +22,7 @@ const App = () => {
       <Route path="/dashboard">
         <Dashboard />
       </Route>
-      <Route path="/sell">
+      <Route exact path="/sell">
         <Sell />
       </Route>
       <Redirect to="/" />
