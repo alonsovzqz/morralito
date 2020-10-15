@@ -160,6 +160,11 @@ const Sell = () => {
         </div>
       </div>
       <div className="form-group row justify-content-end">
+        <div className="col d-flex align-items-center">
+          <Button to="/dashboard" buttonType="link">
+            Cancel
+          </Button>
+        </div>
         <div className="col-4 d-flex justify-content-around">
           <Button type="button" buttonType="secondary">
             <span className="bs bs-printer"></span> Imprimir recibo
