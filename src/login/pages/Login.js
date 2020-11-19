@@ -67,8 +67,6 @@ const Login = () => {
   const authSubmitHandler = (event) => {
     event.preventDefault();
 
-    // TO-DO: Change the logic to redirect
-    // the user once logged in.
     history.push("/dashboard");
   };
 

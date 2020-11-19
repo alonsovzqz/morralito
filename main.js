@@ -1,6 +1,29 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const url = require("url");
+const Datastore = require("nedb");
+
+let userData = app.getAppPath("userData");
+let dbExchange = path.join(userData, "data.db");
+let dbUsers = path.join(userData, "users.db");
+let db = new Datastore({
+  filename: dbExchange,
+  autoload: true,
+  onload: (err) => {
+    if (err) {
+      console.error("Error loading the database: ", err);
+    }
+  },
+  timestampData: true,
+});
+
+ipcMain.handle("insert-data", (e, args) => {
+  db.insert(args, (err, doc) => {
+    if (err) console.error("ERROR: ", err);
+
+    e.returnValue = "Added";
+  });
+});
 
 const {
   default: installExtension,
@@ -23,8 +46,8 @@ if (process.platform === "win32") {
 const createWindow = () => {
   let indexPath = null;
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1400,
+    height: 800,
     webPreferences: {
       nodeIntegration: true,
     },
