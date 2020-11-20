@@ -18,7 +18,7 @@
   "dependencies": {
     "bootstrap": "^4.5.2",
     "bootstrap-icons": "^1.0.0",
-    "invoice-number": "^1.0.6",
+    "invoice-number": "github:amindia/invoice-number",
     "jquery": "^3.5.1",
     "nedb": "^1.8.0",
     "popper.js": "^1.16.1",

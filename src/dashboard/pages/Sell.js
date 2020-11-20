@@ -45,10 +45,8 @@ const Sell = () => {
   ];
   const date = new Date();
 
-  const lastInvoiceID = ipcRenderer.sendSync("getLastInvoiceID") || "F0000000";
-  console.log(lastInvoiceID.operationId);
-
-  invoiceNumber.next(lastInvoiceID.operationId);
+  const lastRecord = ipcRenderer.sendSync("getLastInvoiceID");
+  const lastInvoiceNumber = lastRecord === null ? "0000000" : lastRecord.operationId;
 
   const updateTotalAmountHandlerFromSellAmount = (e) => {
     const parsedQty = parseFloat(e.target.value);
@@ -105,7 +103,6 @@ const Sell = () => {
     };
 
     ipcRenderer.invoke("insert-data", sellData);
-    setInvoiceID(invoiceID++);
   };
 
   return (
@@ -126,7 +123,7 @@ const Sell = () => {
             className="form-control form-control-sm"
             id="folio"
             readOnly={true}
-            value={invoiceNumber}
+            value={invoiceNumber.next(lastInvoiceNumber)}
           />
         </div>
         <div className="form-group col-6">
