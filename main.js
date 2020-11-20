@@ -17,6 +17,7 @@ let db = new Datastore({
   timestampData: true,
 });
 
+// Insert data into the the sell/buy database
 ipcMain.handle("insert-data", (e, args) => {
   db.insert(args, (err, doc) => {
     if (err) console.error("ERROR: ", err);
@@ -25,6 +26,8 @@ ipcMain.handle("insert-data", (e, args) => {
   });
 });
 
+// Get the last invoice ID
+// TO-DO: Improve retrieving the data with larger number IDs
 ipcMain.on("getLastInvoiceID", (e, args) => {
   db.findOne({})
     .sort({ operationId: -1 })
@@ -66,7 +69,7 @@ const createWindow = () => {
   if (dev && process.argv.indexOf("--noDevServer") === -1) {
     indexPath = url.format({
       protocol: "http",
-      host: "localhost:8081",
+      host: "localhost:8080",
       pathname: "index.html",
       slashes: true,
     });
