@@ -21,8 +21,18 @@ ipcMain.handle("insert-data", (e, args) => {
   db.insert(args, (err, doc) => {
     if (err) console.error("ERROR: ", err);
 
-    e.returnValue = "Added";
+    e.returnValue = `Added ${doc.operationId}`;
   });
+});
+
+ipcMain.on("getLastInvoiceID", (e, args) => {
+  db.findOne({})
+    .sort({ operationId: -1 })
+    .exec((err, doc) => {
+      if (err) console.error("ERROR: ", err);
+
+      e.returnValue = doc;
+    });
 });
 
 const {

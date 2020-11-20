@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Button from "../../shared/components/FormElements/Button";
 
 const { ipcRenderer } = require("electron");
+let invoiceNumber = require("invoice-number");
 
 const Sell = () => {
   const [qty, setQty] = useState("0.00");
@@ -43,6 +44,11 @@ const Sell = () => {
     "Zacatecas",
   ];
   const date = new Date();
+
+  const lastInvoiceID = ipcRenderer.sendSync("getLastInvoiceID") || "F0000000";
+  console.log(lastInvoiceID.operationId);
+
+  invoiceNumber.next(lastInvoiceID.operationId);
 
   const updateTotalAmountHandlerFromSellAmount = (e) => {
     const parsedQty = parseFloat(e.target.value);
@@ -99,6 +105,7 @@ const Sell = () => {
     };
 
     ipcRenderer.invoke("insert-data", sellData);
+    setInvoiceID(invoiceID++);
   };
 
   return (
@@ -119,7 +126,7 @@ const Sell = () => {
             className="form-control form-control-sm"
             id="folio"
             readOnly={true}
-            value="F0000058"
+            value={invoiceNumber}
           />
         </div>
         <div className="form-group col-6">
