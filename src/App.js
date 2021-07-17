@@ -1,15 +1,12 @@
-import React from "react";
+import React from 'react';
 import {
   Redirect,
   Route,
   Switch,
   BrowserRouter as Router,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import Login from "./login/pages/Login";
-import Dashboard from "./dashboard/pages/Dashboard";
-import Sell from "./dashboard/pages/Sell";
-import UserMenu from "./shared/components/UIElements/UserMenu";
+import Login from './pages/Login/Login';
 
 const App = () => {
   let routes = null;
@@ -19,18 +16,11 @@ const App = () => {
       <Route path="/" exact>
         <Login />
       </Route>
-      <Route path="/dashboard">
-        <Dashboard />
-      </Route>
-      <Route exact path="/sell">
-        <Sell />
-      </Route>
       <Redirect to="/" />
     </Switch>
   );
   return (
     <Router>
-      <UserMenu />
       <main className="container-fluid">{routes}</main>
     </Router>
   );
