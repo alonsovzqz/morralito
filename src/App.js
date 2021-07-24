@@ -5,8 +5,9 @@ import {
   Switch,
   BrowserRouter as Router,
 } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
-import Login from './pages/Login/Login';
+import Setup from './pages/Setup/Setup';
 
 const App = () => {
   let routes = null;
@@ -14,14 +15,16 @@ const App = () => {
   routes = (
     <Switch>
       <Route path="/" exact>
-        <Login />
+        <Setup />
       </Route>
       <Redirect to="/" />
     </Switch>
   );
   return (
     <Router>
-      <main className="container-fluid">{routes}</main>
+      <Container className="app" fluid>
+        {routes}
+      </Container>
     </Router>
   );
 };

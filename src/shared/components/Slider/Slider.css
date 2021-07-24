@@ -1,0 +1,19 @@
+.slider {
+  overflow: hidden;
+}
+
+.slider__inner {
+  white-space: nowrap;
+  transition: transform 0.3s ease-in-out;
+}
+
+.slider__indicators {
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider__indicators > button:focus,
+.slider__indicators > button:focus + .slider__indicators > button:active {
+  box-shadow: none;
+  outline: none;
+}
